@@ -6,26 +6,56 @@ const FIELD =
   "w-full border border-border bg-background p-4 text-sm text-foreground outline-none transition-colors placeholder:text-text-muted focus:border-bronze";
 
 export function Contact() {
-  const { t } = useLanguage();
+  const { lang, t } = useLanguage();
   const [sent, setSent] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<Record<string, boolean>>({});
 
-  function onSubmit(e: FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const data = new FormData(e.currentTarget);
+    const form = e.currentTarget;
+    const data = new FormData(form);
     const required = ["name", "company", "branches", "task", "contact"];
     const next: Record<string, boolean> = {};
     required.forEach((k) => {
       if (!String(data.get(k) ?? "").trim()) next[k] = true;
     });
     setErrors(next);
+
     if (Object.keys(next).length === 0) {
       setIsSubmitting(true);
-      setTimeout(() => {
+      const webhookUrl = import.meta.env.VITE_GOOGLE_SHEETS_WEBHOOK_URL;
+      const payload = {
+        name: String(data.get("name") ?? "").trim(),
+        company: String(data.get("company") ?? "").trim(),
+        branches: String(data.get("branches") ?? "").trim(),
+        revenue: String(data.get("revenue") ?? "").trim(),
+        message: String(data.get("task") ?? "").trim(),
+        task: String(data.get("task") ?? "").trim(),
+        contact: String(data.get("contact") ?? "").trim(),
+        language: lang,
+        timestamp: new Date().toISOString(),
+      };
+
+      try {
+        if (webhookUrl) {
+          await fetch(webhookUrl, {
+            method: "POST",
+            mode: "no-cors",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(payload),
+          });
+        } else {
+          await new Promise((resolve) => setTimeout(resolve, 600));
+        }
+      } catch (err) {
+        console.error("Webhook submit error:", err);
+      } finally {
         setIsSubmitting(false);
         setSent(true);
-      }, 600);
+      }
     }
   }
 
@@ -59,17 +89,17 @@ export function Contact() {
                 <input
                   name="name"
                   placeholder={t.contact.form.namePlaceholder}
-                  className={`${FIELD} ${errors['name'] ? "border-destructive" : ""}`}
+                  className={`${FIELD} ${errors["name"] ? "border-destructive" : ""}`}
                 />
                 <input
                   name="company"
                   placeholder={t.contact.form.companyPlaceholder}
-                  className={`${FIELD} ${errors['company'] ? "border-destructive" : ""}`}
+                  className={`${FIELD} ${errors["company"] ? "border-destructive" : ""}`}
                 />
                 <select
                   name="branches"
                   defaultValue=""
-                  className={`${FIELD} ${errors['branches'] ? "border-destructive" : ""}`}
+                  className={`${FIELD} ${errors["branches"] ? "border-destructive" : ""}`}
                 >
                   <option value="" disabled>
                     {t.contact.form.branchesPlaceholder}
@@ -84,17 +114,17 @@ export function Contact() {
                   name="task"
                   rows={4}
                   placeholder={t.contact.form.taskPlaceholder}
-                  className={`${FIELD} resize-none ${errors['task'] ? "border-destructive" : ""}`}
+                  className={`${FIELD} resize-none ${errors["task"] ? "border-destructive" : ""}`}
                 />
                 <input
                   name="contact"
                   placeholder={t.contact.form.contactPlaceholder}
-                  className={`${FIELD} ${errors['contact'] ? "border-destructive" : ""}`}
+                  className={`${FIELD} ${errors["contact"] ? "border-destructive" : ""}`}
                 />
 
                 {Object.keys(errors).length > 0 && (
                   <p className="text-xs text-destructive">
-                    {t.contact.form.namePlaceholder}... (Required)
+                    {t.contact.form.requiredError}
                   </p>
                 )}
 
@@ -105,9 +135,6 @@ export function Contact() {
                 >
                   {isSubmitting ? t.contact.form.submitting : t.contact.form.submitBtn}
                 </button>
-                <p className="mt-4 text-xs leading-relaxed text-text-muted">
-                  {t.contact.form.successMsg}
-                </p>
               </form>
             )}
           </div>

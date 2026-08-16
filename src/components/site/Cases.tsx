@@ -9,6 +9,7 @@ interface CaseMediaProps {
 }
 
 export const CaseMedia = ({ number, brand, imageSrc }: CaseMediaProps) => {
+  const { t } = useLanguage();
   const [imageError, setImageError] = useState(false);
 
   return (
@@ -26,7 +27,7 @@ export const CaseMedia = ({ number, brand, imageSrc }: CaseMediaProps) => {
             {number}
           </span>
           <span className="text-xs uppercase tracking-[0.2em] text-[#78716C] mt-2 font-mono">
-            {brand} · Visual Asset
+            {t.cases.casePrefix} {number} · {t.cases.mediaLabel}
           </span>
         </div>
       )}
@@ -49,7 +50,9 @@ export function Cases() {
 
             {/* Center Info (col-span-12 lg:col-span-5) */}
             <div className="col-span-12 lg:col-span-5">
-              <p className="mb-2 font-mono text-xs font-semibold text-[#78716C]">CASE 01</p>
+              <p className="mb-2 font-mono text-xs font-semibold text-[#78716C]">
+                {t.cases.casePrefix} 01
+              </p>
               <h3 className="text-3xl font-extrabold text-[#FAFAF9]">{t.cases.pasta.title}</h3>
               <p className="mb-4 mt-1 text-sm text-[#A8A29E]">"{t.cases.pasta.subtitle}"</p>
               <ul className="space-y-2 text-sm text-[#D6D3D1]">
@@ -87,7 +90,9 @@ export function Cases() {
 
             {/* Center Info (col-span-12 lg:col-span-5) */}
             <div className="col-span-12 lg:col-span-5">
-              <p className="mb-1 font-mono text-xs font-semibold text-[#78716C]">CASE 02</p>
+              <p className="mb-1 font-mono text-xs font-semibold text-[#78716C]">
+                {t.cases.casePrefix} 02
+              </p>
               <h3 className="text-3xl font-extrabold text-[#FAFAF9]">{t.cases.pipls.title}</h3>
               {t.cases.pipls.context && (
                 <p className="mb-2 font-mono text-xs font-medium text-[#BA9A74]">
@@ -132,7 +137,9 @@ export function Cases() {
 
             {/* Center Info (col-span-12 lg:col-span-5) */}
             <div className="col-span-12 lg:col-span-5">
-              <p className="mb-2 font-mono text-xs font-semibold text-[#78716C]">CASE 03</p>
+              <p className="mb-2 font-mono text-xs font-semibold text-[#78716C]">
+                {t.cases.casePrefix} 03
+              </p>
               <h3 className="text-3xl font-extrabold text-[#FAFAF9]">{t.cases.bellissimo.title}</h3>
               <p className="mb-4 mt-1 text-sm text-[#A8A29E]">"{t.cases.bellissimo.subtitle}"</p>
               <ul className="space-y-2 text-sm text-[#D6D3D1]">
@@ -165,7 +172,9 @@ export function Cases() {
 
             {/* Center Info (col-span-12 lg:col-span-5) */}
             <div className="col-span-12 lg:col-span-5">
-              <p className="mb-2 font-mono text-xs font-semibold text-[#78716C]">CASE 04</p>
+              <p className="mb-2 font-mono text-xs font-semibold text-[#78716C]">
+                {t.cases.casePrefix} 04
+              </p>
               <h3 className="text-3xl font-extrabold text-[#FAFAF9]">{t.cases.sariqBola.title}</h3>
               <p className="mb-4 mt-1 text-sm text-[#A8A29E]">"{t.cases.sariqBola.subtitle}"</p>
               <ul className="space-y-2 text-sm text-[#D6D3D1]">
