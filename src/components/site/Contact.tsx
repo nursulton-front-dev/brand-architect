@@ -1,11 +1,14 @@
 import { useState, type FormEvent } from "react";
 import { Reveal } from "./motion";
+import { useLanguage } from "@/context/LanguageContext";
 
 const FIELD =
   "w-full border border-border bg-background p-4 text-sm text-foreground outline-none transition-colors placeholder:text-text-muted focus:border-bronze";
 
 export function Contact() {
+  const { t } = useLanguage();
   const [sent, setSent] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<Record<string, boolean>>({});
 
   function onSubmit(e: FormEvent<HTMLFormElement>) {
@@ -17,7 +20,13 @@ export function Contact() {
       if (!String(data.get(k) ?? "").trim()) next[k] = true;
     });
     setErrors(next);
-    if (Object.keys(next).length === 0) setSent(true);
+    if (Object.keys(next).length === 0) {
+      setIsSubmitting(true);
+      setTimeout(() => {
+        setIsSubmitting(false);
+        setSent(true);
+      }, 600);
+    }
   }
 
   return (
@@ -25,18 +34,12 @@ export function Contact() {
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-14 px-5 sm:px-8 lg:grid-cols-2 lg:gap-20">
         <Reveal>
           <h2 className="text-3xl font-extrabold leading-tight tracking-tight text-foreground sm:text-5xl">
-            НЕ КАЖДОМУ БИЗНЕСУ НУЖЕН СОВЕТНИК.
+            {t.contact.title}
           </h2>
           <div className="mt-8 max-w-lg space-y-5 text-base leading-relaxed text-muted-foreground">
-            <p>
-              Я подключаюсь к ограниченному количеству проектов и работаю там, где могу реально
-              повлиять на результат.
-            </p>
-            <p>
-              Если у вас ресторанный бизнес, есть амбиция расти и вы считаете, что мой опыт может
-              быть полезен — расскажите немного о компании и задаче.
-            </p>
-            <p>Если поймём, что подходим друг другу — поговорим.</p>
+            <p>{t.contact.text1}</p>
+            <p>{t.contact.text2}</p>
+            <p>{t.contact.text3}</p>
           </div>
         </Reveal>
 
@@ -45,23 +48,22 @@ export function Contact() {
             {sent ? (
               <div className="flex min-h-[420px] flex-col justify-center">
                 <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-bronze">
-                  Заявка отправлена
+                  ✓
                 </p>
                 <p className="mt-5 text-lg leading-relaxed text-foreground">
-                  Спасибо. Посмотрю информацию и свяжусь, если увижу, что мой опыт может быть
-                  полезен в вашей ситуации.
+                  {t.contact.form.successMsg}
                 </p>
               </div>
             ) : (
               <form onSubmit={onSubmit} noValidate className="space-y-4">
                 <input
                   name="name"
-                  placeholder="Имя"
+                  placeholder={t.contact.form.namePlaceholder}
                   className={`${FIELD} ${errors['name'] ? "border-destructive" : ""}`}
                 />
                 <input
                   name="company"
-                  placeholder="Компания / бренд"
+                  placeholder={t.contact.form.companyPlaceholder}
                   className={`${FIELD} ${errors['company'] ? "border-destructive" : ""}`}
                 />
                 <select
@@ -70,42 +72,41 @@ export function Contact() {
                   className={`${FIELD} ${errors['branches'] ? "border-destructive" : ""}`}
                 >
                   <option value="" disabled>
-                    Количество филиалов
+                    {t.contact.form.branchesPlaceholder}
                   </option>
                   <option value="1">1</option>
                   <option value="2-5">2–5</option>
                   <option value="6-15">6–15</option>
                   <option value="15+">15+</option>
                 </select>
-                <input name="revenue" placeholder="Оборот компании (опционально)" className={FIELD} />
+                <input name="revenue" placeholder={t.contact.form.revenuePlaceholder} className={FIELD} />
                 <textarea
                   name="task"
                   rows={4}
-                  placeholder="Какая задача стоит перед бизнесом?"
+                  placeholder={t.contact.form.taskPlaceholder}
                   className={`${FIELD} resize-none ${errors['task'] ? "border-destructive" : ""}`}
                 />
                 <input
                   name="contact"
-                  placeholder="Telegram / Телефон"
+                  placeholder={t.contact.form.contactPlaceholder}
                   className={`${FIELD} ${errors['contact'] ? "border-destructive" : ""}`}
                 />
 
                 {Object.keys(errors).length > 0 && (
-                  <p className="text-xs text-destructive">Заполните обязательные поля.</p>
+                  <p className="text-xs text-destructive">
+                    {t.contact.form.namePlaceholder}... (Required)
+                  </p>
                 )}
 
                 <button
                   type="submit"
-                  className="group flex w-full items-center justify-center gap-3 bg-bronze px-6 py-4 text-sm font-bold uppercase tracking-widest text-background transition-colors hover:bg-bronze-hover"
+                  disabled={isSubmitting}
+                  className="group flex w-full items-center justify-center gap-3 bg-bronze px-6 py-4 text-sm font-bold uppercase tracking-widest text-background transition-colors hover:bg-bronze-hover disabled:opacity-50"
                 >
-                  Отправить
-                  <span className="transition-transform duration-300 group-hover:translate-x-1">
-                    →
-                  </span>
+                  {isSubmitting ? t.contact.form.submitting : t.contact.form.submitBtn}
                 </button>
                 <p className="mt-4 text-xs leading-relaxed text-text-muted">
-                  Спасибо. Посмотрю информацию и свяжусь, если увижу, что мой опыт может быть
-                  полезен в вашей ситуации.
+                  {t.contact.form.successMsg}
                 </p>
               </form>
             )}

@@ -1,118 +1,205 @@
 import { Reveal } from "./motion";
-
-type CaseItem = {
-  id: string;
-  title: string;
-  subtitle: string;
-  context?: string;
-  blocks: { label: string; text: string }[];
-  metric?: { value: string; label: string };
-};
-
-const CASES: CaseItem[] = [
-  {
-    id: "01",
-    title: "PASTA",
-    subtitle: "От зависимости от агрегаторов — к собственной доставке.",
-    blocks: [
-      { label: "Задача", text: "Снизить зависимость от агрегаторов и построить свой канал продаж." },
-      { label: "Решение", text: "Цифровизация СВД и delivery funnel, стандартизация процессов доставки." },
-      { label: "Маркетинг", text: "Реновация маркетинговой системы и удержания гостя." },
-    ],
-    metric: { value: "300+", label: "заказов в день через собственный канал" },
-  },
-  {
-    id: "02",
-    title: "PIPLS",
-    subtitle: "Из ручного управления — в операционную систему.",
-    context: "20+ филиалов · ~2,4 млрд сум оборота в месяц",
-    blocks: [
-      { label: "Organization", text: "Оргструктура C-level и территориальных управляющих." },
-      { label: "Operations", text: "Чек-листы, 5S, графики и стандарты смен." },
-      { label: "Management", text: "KPI и недельный управленческий ритм." },
-      { label: "Control", text: "Аудит, служба безопасности, тайный гость." },
-      { label: "Finance", text: "P&L / CF / Balance, сверки, фудкост." },
-      { label: "People", text: "HR-система и аттестация персонала." },
-    ],
-  },
-  {
-    id: "03",
-    title: "BELLISSIMO PIZZA",
-    subtitle: "Построение маркетинговой функции в период масштабирования.",
-    blocks: [
-      { label: "Команда", text: "Формирование in-house маркетинговой команды с нуля." },
-      { label: "Бренд", text: "Масштабирование бренда до лидера рынка." },
-    ],
-    metric: { value: "$1M+", label: "advertising budget managed" },
-  },
-  {
-    id: "04",
-    title: "SARIQ BOLA PIZZA",
-    subtitle: "Маркетинг, построенный вокруг цифр.",
-    blocks: [
-      { label: "Аналитика", text: "Система сквозных дашбордов: продажи, доставка, RFM." },
-      { label: "Retention", text: "Запуск CRM и программ удержания гостей." },
-    ],
-    metric: { value: "100 → 800", label: "заказов доставки в день" },
-  },
-];
+import { useLanguage } from "@/context/LanguageContext";
+import proof1 from "@/assets/proof-1.jpg";
+import proof2 from "@/assets/proof-2.jpg";
+import proof3 from "@/assets/proof-3.jpg";
+import proof4 from "@/assets/proof-4.jpg";
 
 export function Cases() {
+  const { t } = useLanguage();
+
   return (
-    <section id="cases" className="border-b border-border">
-      {CASES.map((c, i) => (
-        <div key={c.id} className="border-b border-border last:border-0 py-24 sm:py-32">
-          <div className="mx-auto max-w-7xl px-5 sm:px-8">
-            <Reveal>
-              <div
-                className={`flex flex-col gap-12 lg:gap-20 ${
-                  i % 2 === 1 ? "lg:flex-row-reverse" : "lg:flex-row"
-                }`}
-              >
-                <div className="lg:w-1/2">
-                  <span className="font-mono text-xs tracking-widest text-text-muted">
-                    CASE {c.id}
-                  </span>
-                  <h2 className="mt-5 text-3xl font-black tracking-tight text-foreground sm:text-5xl">
-                    {c.title}
-                  </h2>
-                  {c.context && (
-                    <p className="mt-3 font-mono text-xs text-bronze sm:text-sm">{c.context}</p>
-                  )}
-                  <p className="mt-4 max-w-lg text-lg leading-relaxed text-muted-foreground">
-                    {c.subtitle}
-                  </p>
+    <section id="cases" className="border-b border-border py-12">
+      <div className="mx-auto max-w-7xl px-5 sm:px-8">
+        {/* CASE 01: PASTA */}
+        <Reveal>
+          <div className="grid grid-cols-1 items-center gap-8 py-16 lg:grid-cols-12 border-t border-[#292524] first:border-t-0">
+            {/* Left Image (lg:col-span-4) */}
+            <div className="relative h-56 overflow-hidden rounded-lg border border-[#292524] lg:col-span-4">
+              <img
+                src={proof1}
+                alt={t.cases.pasta.title}
+                loading="lazy"
+                width={600}
+                height={400}
+                className="h-full w-full object-cover saturate-[0.85] transition-transform duration-500 hover:scale-105"
+              />
+              <div className="pointer-events-none absolute inset-0 shadow-[inset_0_0_30px_rgba(0,0,0,0.5)]" />
+            </div>
 
-                  {c.metric && (
-                    <div className="mt-12 border-t border-border pt-8">
-                      <p className="num break-words text-5xl font-black leading-none text-bronze sm:text-6xl lg:text-7xl">
-                        {c.metric.value}
-                      </p>
-                      <p className="mt-3 text-[10px] uppercase tracking-widest text-text-muted sm:text-xs">
-                        {c.metric.label}
-                      </p>
-                    </div>
-                  )}
-                </div>
+            {/* Center Info (lg:col-span-5) */}
+            <div className="lg:col-span-5">
+              <p className="mb-2 font-mono text-xs font-semibold text-[#78716C]">CASE 01</p>
+              <h3 className="text-3xl font-extrabold text-[#FAFAF9]">{t.cases.pasta.title}</h3>
+              <p className="mb-4 mt-1 text-sm text-[#A8A29E]">"{t.cases.pasta.subtitle}"</p>
+              <ul className="space-y-2 text-sm text-[#D6D3D1]">
+                {t.cases.pasta.tasks.map((task, idx) => (
+                  <li key={idx} className="flex items-start gap-2.5">
+                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#BA9A74]" />
+                    <span>{task}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-                <div className="grid gap-px self-start overflow-hidden border border-border bg-border sm:grid-cols-2 lg:w-1/2">
-                  {c.blocks.map((b) => (
-                    <div
-                      key={b.label}
-                      className="bg-surface p-6 transition-colors duration-300 hover:bg-surface-hover"
-                    >
-                      <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-bronze">
-                        {b.label}
-                      </p>
-                      <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{b.text}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </Reveal>
+            {/* Right Metric (lg:col-span-3) */}
+            <div className="rounded-lg border border-[#292524]/60 bg-[#161413]/40 p-6 backdrop-blur-sm lg:col-span-3">
+              <p className="num text-5xl font-black tracking-tight text-[#BA9A74] lg:text-6xl">
+                {t.cases.pasta.metricValue}
+              </p>
+              <p className="mt-2 text-xs font-semibold uppercase tracking-wider text-[#78716C]">
+                {t.cases.pasta.metricLabel}
+              </p>
+              {t.cases.pasta.resultNote && (
+                <p className="mt-3 border-t border-[#292524] pt-3 text-xs leading-relaxed text-[#A8A29E]">
+                  {t.cases.pasta.resultNote}
+                </p>
+              )}
+            </div>
           </div>
-        </div>
-      ))}
+        </Reveal>
+
+        {/* CASE 02: PIPLS */}
+        <Reveal>
+          <div className="grid grid-cols-1 items-center gap-8 py-16 lg:grid-cols-12 border-t border-[#292524]">
+            {/* Left Image (lg:col-span-4) */}
+            <div className="relative h-56 overflow-hidden rounded-lg border border-[#292524] lg:col-span-4">
+              <img
+                src={proof3}
+                alt={t.cases.pipls.title}
+                loading="lazy"
+                width={600}
+                height={400}
+                className="h-full w-full object-cover saturate-[0.85] transition-transform duration-500 hover:scale-105"
+              />
+              <div className="pointer-events-none absolute inset-0 shadow-[inset_0_0_30px_rgba(0,0,0,0.5)]" />
+            </div>
+
+            {/* Center Info (lg:col-span-5) */}
+            <div className="lg:col-span-5">
+              <p className="mb-1 font-mono text-xs font-semibold text-[#78716C]">CASE 02</p>
+              <h3 className="text-3xl font-extrabold text-[#FAFAF9]">{t.cases.pipls.title}</h3>
+              {t.cases.pipls.context && (
+                <p className="mb-2 font-mono text-xs font-medium text-[#BA9A74]">
+                  {t.cases.pipls.context}
+                </p>
+              )}
+              <p className="mb-4 text-sm text-[#A8A29E]">"{t.cases.pipls.subtitle}"</p>
+
+              {/* 6 Mini Tags Grid */}
+              <div className="grid grid-cols-2 gap-2 text-xs">
+                {t.cases.pipls.tags?.map((tag, idx) => (
+                  <div key={idx} className="rounded-md border border-[#292524] bg-[#161413]/60 p-2.5">
+                    <span className="block font-bold text-[#FAFAF9]">{tag.title}</span>
+                    <span className="text-[11px] text-[#A8A29E]">{tag.desc}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Right Metric (lg:col-span-3) */}
+            <div className="rounded-lg border border-[#292524]/60 bg-[#161413]/40 p-6 backdrop-blur-sm lg:col-span-3">
+              <p className="num text-5xl font-black tracking-tight text-[#BA9A74] lg:text-6xl">
+                {t.cases.pipls.metricValue}
+              </p>
+              <p className="mt-2 text-xs font-semibold uppercase tracking-wider text-[#78716C]">
+                {t.cases.pipls.metricLabel}
+              </p>
+              {t.cases.pipls.resultNote && (
+                <p className="mt-3 border-t border-[#292524] pt-3 text-xs leading-relaxed text-[#A8A29E]">
+                  {t.cases.pipls.resultNote}
+                </p>
+              )}
+            </div>
+          </div>
+        </Reveal>
+
+        {/* CASE 03: BELLISSIMO PIZZA */}
+        <Reveal>
+          <div className="grid grid-cols-1 items-center gap-8 py-16 lg:grid-cols-12 border-t border-[#292524]">
+            {/* Left Image (lg:col-span-4) */}
+            <div className="relative h-56 overflow-hidden rounded-lg border border-[#292524] lg:col-span-4">
+              <img
+                src={proof2}
+                alt={t.cases.bellissimo.title}
+                loading="lazy"
+                width={600}
+                height={400}
+                className="h-full w-full object-cover saturate-[0.85] transition-transform duration-500 hover:scale-105"
+              />
+              <div className="pointer-events-none absolute inset-0 shadow-[inset_0_0_30px_rgba(0,0,0,0.5)]" />
+            </div>
+
+            {/* Center Info (lg:col-span-5) */}
+            <div className="lg:col-span-5">
+              <p className="mb-2 font-mono text-xs font-semibold text-[#78716C]">CASE 03</p>
+              <h3 className="text-3xl font-extrabold text-[#FAFAF9]">{t.cases.bellissimo.title}</h3>
+              <p className="mb-4 mt-1 text-sm text-[#A8A29E]">"{t.cases.bellissimo.subtitle}"</p>
+              <ul className="space-y-2 text-sm text-[#D6D3D1]">
+                {t.cases.bellissimo.tasks.map((task, idx) => (
+                  <li key={idx} className="flex items-start gap-2.5">
+                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#BA9A74]" />
+                    <span>{task}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Right Metric (lg:col-span-3) */}
+            <div className="rounded-lg border border-[#292524]/60 bg-[#161413]/40 p-6 backdrop-blur-sm lg:col-span-3">
+              <p className="num text-5xl font-black tracking-tight text-[#BA9A74] lg:text-6xl">
+                {t.cases.bellissimo.metricValue}
+              </p>
+              <p className="mt-2 text-xs font-semibold uppercase tracking-wider text-[#78716C]">
+                {t.cases.bellissimo.metricLabel}
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* CASE 04: SARIQ BOLA PIZZA */}
+        <Reveal>
+          <div className="grid grid-cols-1 items-center gap-8 py-16 lg:grid-cols-12 border-t border-[#292524]">
+            {/* Left Image (lg:col-span-4) */}
+            <div className="relative h-56 overflow-hidden rounded-lg border border-[#292524] lg:col-span-4">
+              <img
+                src={proof4}
+                alt={t.cases.sariqBola.title}
+                loading="lazy"
+                width={600}
+                height={400}
+                className="h-full w-full object-cover saturate-[0.85] transition-transform duration-500 hover:scale-105"
+              />
+              <div className="pointer-events-none absolute inset-0 shadow-[inset_0_0_30px_rgba(0,0,0,0.5)]" />
+            </div>
+
+            {/* Center Info (lg:col-span-5) */}
+            <div className="lg:col-span-5">
+              <p className="mb-2 font-mono text-xs font-semibold text-[#78716C]">CASE 04</p>
+              <h3 className="text-3xl font-extrabold text-[#FAFAF9]">{t.cases.sariqBola.title}</h3>
+              <p className="mb-4 mt-1 text-sm text-[#A8A29E]">"{t.cases.sariqBola.subtitle}"</p>
+              <ul className="space-y-2 text-sm text-[#D6D3D1]">
+                {t.cases.sariqBola.tasks.map((task, idx) => (
+                  <li key={idx} className="flex items-start gap-2.5">
+                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#BA9A74]" />
+                    <span>{task}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Right Metric (lg:col-span-3) */}
+            <div className="rounded-lg border border-[#292524]/60 bg-[#161413]/40 p-6 backdrop-blur-sm lg:col-span-3">
+              <p className="num text-4xl font-black tracking-tight text-[#BA9A74] whitespace-nowrap lg:text-5xl">
+                {t.cases.sariqBola.metricValue}
+              </p>
+              <p className="mt-2 text-xs font-semibold uppercase tracking-wider text-[#78716C]">
+                {t.cases.sariqBola.metricLabel}
+              </p>
+            </div>
+          </div>
+        </Reveal>
+      </div>
     </section>
   );
 }
