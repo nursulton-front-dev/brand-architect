@@ -57,17 +57,17 @@ export function Contact() {
                 <input
                   name="name"
                   placeholder="Имя"
-                  className={`${FIELD} ${errors.name ? "border-destructive" : ""}`}
+                  className={`${FIELD} ${errors['name'] ? "border-destructive" : ""}`}
                 />
                 <input
                   name="company"
                   placeholder="Компания / бренд"
-                  className={`${FIELD} ${errors.company ? "border-destructive" : ""}`}
+                  className={`${FIELD} ${errors['company'] ? "border-destructive" : ""}`}
                 />
                 <select
                   name="branches"
                   defaultValue=""
-                  className={`${FIELD} ${errors.branches ? "border-destructive" : ""}`}
+                  className={`${FIELD} ${errors['branches'] ? "border-destructive" : ""}`}
                 >
                   <option value="" disabled>
                     Количество филиалов
@@ -82,12 +82,12 @@ export function Contact() {
                   name="task"
                   rows={4}
                   placeholder="Какая задача стоит перед бизнесом?"
-                  className={`${FIELD} resize-none ${errors.task ? "border-destructive" : ""}`}
+                  className={`${FIELD} resize-none ${errors['task'] ? "border-destructive" : ""}`}
                 />
                 <input
                   name="contact"
                   placeholder="Telegram / Телефон"
-                  className={`${FIELD} ${errors.contact ? "border-destructive" : ""}`}
+                  className={`${FIELD} ${errors['contact'] ? "border-destructive" : ""}`}
                 />
 
                 {Object.keys(errors).length > 0 && (
