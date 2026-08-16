@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 230 60" fill="none">
+  <g transform="translate(4, 4)">
+    <circle cx="25" cy="25" r="23" fill="none" stroke="#EAB308" stroke-width="2.5"/>
+    <path d="M 12 18 C 14 9 28 7 36 12 C 40 9 46 11 46 18 C 50 18 52 21 48 23 C 40 22 16 22 8 23 C 5 21 7 18 12 18 Z" fill="#EAB308"/>
+    <circle cx="18" cy="28" r="2" fill="#0C0B0A"/>
+    <circle cx="32" cy="28" r="2" fill="#0C0B0A"/>
+    <path d="M 20 33 Q 25 38 30 33" fill="none" stroke="#0C0B0A" stroke-width="2" stroke-linecap="round"/>
+  </g>
+  <text x="60" y="30" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="19" letter-spacing="0.8" fill="#FAFAF9">SARIQ BOLA</text>
+  <text x="135" y="50" font-family="'Brush Script MT', 'Caveat', cursive, sans-serif" font-style="italic" font-weight="700" font-size="23" fill="#EAB308">pizza</text>
+</svg>
