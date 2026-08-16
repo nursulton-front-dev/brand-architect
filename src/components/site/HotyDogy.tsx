@@ -8,7 +8,7 @@ export function HotyDogy() {
   const { t } = useLanguage();
 
   return (
-    <section className="border-b border-border py-24 sm:py-32">
+    <section id="entrepreneurial-proof" className="border-b border-border py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">
           {/* Left Column (lg:col-span-6) */}
