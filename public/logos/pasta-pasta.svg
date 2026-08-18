@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 190 60" fill="none">
-  <rect x="2" y="2" width="186" height="56" rx="8" fill="none" stroke="#E7E5E4" stroke-width="2" stroke-opacity="0.4"/>
-  <text x="14" y="26" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="22" letter-spacing="1.5" fill="#FAFAF9">PASTA</text>
-  <text x="14" y="46" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="22" letter-spacing="1.5" fill="#FAFAF9">PASTA</text>
-  <path d="M 110 40 Q 130 35 150 42 Q 165 47 178 40" fill="none" stroke="#EF4444" stroke-width="3.5" stroke-linecap="round" opacity="0.9"/>
-</svg>

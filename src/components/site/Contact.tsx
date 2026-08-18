@@ -3,7 +3,7 @@ import { Reveal } from "./motion";
 import { useLanguage } from "@/context/LanguageContext";
 
 const FIELD =
-  "w-full border border-border bg-background p-4 text-sm text-foreground outline-none transition-colors placeholder:text-text-muted focus:border-bronze";
+  "w-full rounded-md border border-[#3D352F] bg-[#181513] p-4 text-sm text-[#FDFBF7] outline-none transition-colors placeholder:text-[#877D74] focus:border-[#D4AF37]";
 
 export function Contact() {
   const { lang, t } = useLanguage();
@@ -60,13 +60,13 @@ export function Contact() {
   }
 
   return (
-    <section id="contact" className="border-b border-border py-24 sm:py-32">
+    <section id="contact" className="border-b border-[#3D352F] py-24 sm:py-32 bg-[#181513]">
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-14 px-5 sm:px-8 lg:grid-cols-2 lg:gap-20">
         <Reveal>
-          <h2 className="text-3xl font-extrabold leading-tight tracking-tight text-foreground sm:text-5xl">
+          <h2 className="text-3xl font-extrabold leading-tight tracking-tight text-[#FDFBF7] sm:text-5xl">
             {t.contact.title}
           </h2>
-          <div className="mt-8 max-w-lg space-y-5 text-base leading-relaxed text-muted-foreground">
+          <div className="mt-8 max-w-lg space-y-5 text-base leading-relaxed text-[#B8AEA5]">
             <p>{t.contact.text1}</p>
             <p>{t.contact.text2}</p>
             <p>{t.contact.text3}</p>
@@ -74,13 +74,13 @@ export function Contact() {
         </Reveal>
 
         <Reveal delay={0.1}>
-          <div className="border border-border bg-surface p-6 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.03)] sm:p-8">
+          <div className="rounded-xl border border-[#3D352F] bg-[#24201D] p-6 shadow-xl sm:p-8">
             {sent ? (
               <div className="flex min-h-[420px] flex-col justify-center">
-                <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-bronze">
+                <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#D4AF37]">
                   ✓
                 </p>
-                <p className="mt-5 text-lg leading-relaxed text-foreground">
+                <p className="mt-5 text-lg leading-relaxed text-[#FDFBF7]">
                   {t.contact.form.successMsg}
                 </p>
               </div>
@@ -89,17 +89,17 @@ export function Contact() {
                 <input
                   name="name"
                   placeholder={t.contact.form.namePlaceholder}
-                  className={`${FIELD} ${errors["name"] ? "border-destructive" : ""}`}
+                  className={`${FIELD} ${errors["name"] ? "border-red-500" : ""}`}
                 />
                 <input
                   name="company"
                   placeholder={t.contact.form.companyPlaceholder}
-                  className={`${FIELD} ${errors["company"] ? "border-destructive" : ""}`}
+                  className={`${FIELD} ${errors["company"] ? "border-red-500" : ""}`}
                 />
                 <select
                   name="branches"
                   defaultValue=""
-                  className={`${FIELD} ${errors["branches"] ? "border-destructive" : ""}`}
+                  className={`${FIELD} ${errors["branches"] ? "border-red-500" : ""}`}
                 >
                   <option value="" disabled>
                     {t.contact.form.branchesPlaceholder}
@@ -114,16 +114,16 @@ export function Contact() {
                   name="task"
                   rows={4}
                   placeholder={t.contact.form.taskPlaceholder}
-                  className={`${FIELD} resize-none ${errors["task"] ? "border-destructive" : ""}`}
+                  className={`${FIELD} resize-none ${errors["task"] ? "border-red-500" : ""}`}
                 />
                 <input
                   name="contact"
                   placeholder={t.contact.form.contactPlaceholder}
-                  className={`${FIELD} ${errors["contact"] ? "border-destructive" : ""}`}
+                  className={`${FIELD} ${errors["contact"] ? "border-red-500" : ""}`}
                 />
 
                 {Object.keys(errors).length > 0 && (
-                  <p className="text-xs text-destructive">
+                  <p className="text-xs text-red-400">
                     {t.contact.form.requiredError}
                   </p>
                 )}
@@ -131,7 +131,7 @@ export function Contact() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="group flex w-full items-center justify-center gap-3 bg-bronze px-6 py-4 text-sm font-bold uppercase tracking-widest text-background transition-colors hover:bg-bronze-hover disabled:opacity-50"
+                  className="group flex w-full items-center justify-center gap-3 rounded-md bg-[#D4AF37] px-6 py-4 text-sm font-bold uppercase tracking-widest text-[#181513] transition-all hover:bg-[#E5C358] disabled:opacity-50"
                 >
                   {isSubmitting ? t.contact.form.submitting : t.contact.form.submitBtn}
                 </button>
