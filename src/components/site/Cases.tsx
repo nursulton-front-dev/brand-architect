@@ -5,11 +5,18 @@ import { useLanguage } from "@/context/LanguageContext";
 interface CaseMediaProps {
   number: string;
   brand: string;
-  logoSrc: string;
+  logoSrc?: string;
   imageSrc?: string;
+  hideLogo?: boolean;
 }
 
-export const CaseMedia = ({ number, brand, logoSrc, imageSrc }: CaseMediaProps) => {
+export const CaseMedia = ({
+  number,
+  brand,
+  logoSrc,
+  imageSrc,
+  hideLogo = false,
+}: CaseMediaProps) => {
   const { t } = useLanguage();
   const [photoError, setPhotoError] = useState(false);
   const [logoError, setLogoError] = useState(false);
@@ -26,32 +33,11 @@ export const CaseMedia = ({ number, brand, logoSrc, imageSrc }: CaseMediaProps) 
             className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-105 saturate-[0.85]"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#181513] via-[#181513]/40 to-transparent pointer-events-none" />
-          
-          {/* Logo overlay badge on bottom left of media block */}
-          {!logoError && (
-            <div className="absolute bottom-5 left-5 z-10 flex items-center justify-center rounded-lg border border-[#3D352F] bg-[#181513]/90 px-4 py-2.5 backdrop-blur-md shadow-lg transition-transform duration-300 group-hover:scale-105">
-              <img
-                src={logoSrc}
-                alt={brand}
-                onError={(e) => {
-                  const target = e.currentTarget;
-                  if (target.src.endsWith('.svg')) {
-                    target.src = logoSrc.replace('.svg', '.png');
-                  } else if (target.src.endsWith('.png')) {
-                    target.src = logoSrc.replace('.png', '.svg');
-                  } else {
-                    setLogoError(true);
-                  }
-                }}
-                className="h-7 sm:h-8 w-auto max-w-[130px] object-contain filter brightness-110"
-              />
-            </div>
-          )}
         </>
       ) : (
         /* Fallback: Pure Logo Display in center of brand card */
         <div className="flex flex-col items-center justify-center text-center p-8 select-none">
-          {!logoError ? (
+          {!hideLogo && logoSrc && !logoError ? (
             <img
               src={logoSrc}
               alt={brand}
@@ -133,7 +119,7 @@ export function Cases() {
         <Reveal>
           <div className="grid grid-cols-1 items-center gap-8 py-16 lg:grid-cols-12 border-t border-[#3D352F]">
             {/* Left Media Block */}
-            <CaseMedia number="02" brand="PIPLS" logoSrc="/logos/pipls.svg" imageSrc="/images/cases/pipls.png" />
+            <CaseMedia number="02" brand="PIPLS" logoSrc="/logos/pipls.svg" imageSrc="/images/cases/pipls.png" hideLogo={true} />
 
             {/* Center Info (col-span-12 lg:col-span-5) */}
             <div className="col-span-12 lg:col-span-5">
@@ -180,7 +166,7 @@ export function Cases() {
         <Reveal>
           <div className="grid grid-cols-1 items-center gap-8 py-16 lg:grid-cols-12 border-t border-[#3D352F]">
             {/* Left Media Block */}
-            <CaseMedia number="03" brand="BELLISSIMO" logoSrc="/logos/bellissimo.svg" imageSrc="/images/cases/bellissimo.jpg" />
+            <CaseMedia number="03" brand="BELLISSIMO" logoSrc="/logos/bellissimo-dark.png" imageSrc="/images/cases/bellissimo.jpg" />
 
             {/* Center Info (col-span-12 lg:col-span-5) */}
             <div className="col-span-12 lg:col-span-5">
@@ -215,7 +201,7 @@ export function Cases() {
         <Reveal>
           <div className="grid grid-cols-1 items-center gap-8 py-16 lg:grid-cols-12 border-t border-[#3D352F]">
             {/* Left Media Block */}
-            <CaseMedia number="04" brand="SARIQ BOLA" logoSrc="/logos/sariq-bola.svg" imageSrc="/images/cases/sariq-bola.jpg" />
+            <CaseMedia number="04" brand="SARIQ BOLA" logoSrc="/logos/sariq-bola.png" imageSrc="/images/cases/sariq-bola.jpg" />
 
             {/* Center Info (col-span-12 lg:col-span-5) */}
             <div className="col-span-12 lg:col-span-5">
