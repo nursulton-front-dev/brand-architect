@@ -201,7 +201,7 @@ export function Cases() {
         <Reveal>
           <div className="grid grid-cols-1 items-center gap-8 py-16 lg:grid-cols-12 border-t border-[#3D352F]">
             {/* Left Media Block */}
-            <CaseMedia number="04" brand="SARIQ BOLA" logoSrc="/logos/sariq-bola.png" imageSrc="/images/cases/sariq-bola.jpg" />
+            <CaseMedia number="04" brand="SARIQ BOLA" logoSrc="/logos/sariq-bola.png" imageSrc="/images/cases/sariq-bola.png" />
 
             {/* Center Info (col-span-12 lg:col-span-5) */}
             <div className="col-span-12 lg:col-span-5">
